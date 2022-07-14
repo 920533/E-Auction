@@ -15,10 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EAuction.DataAccess", "EAuc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EAuction.DataMigration", "EAuction.DataMigration\EAuction.DataMigration.csproj", "{D7967418-C141-48C2-8691-E13B713835B4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{7D442937-EE84-4004-93BB-99F1C1AA1228}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{E900D81F-11DB-40AD-BCB0-3B97F4344A7D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,9 +48,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{E900D81F-11DB-40AD-BCB0-3B97F4344A7D} = {7D442937-EE84-4004-93BB-99F1C1AA1228}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0E231E23-B600-410A-AF8B-D190A306BF1D}
