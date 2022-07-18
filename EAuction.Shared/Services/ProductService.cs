@@ -15,9 +15,8 @@ namespace EAuction.Shared.Services
         private readonly IProductRepository _productRepository;
         private readonly IProductToBuyerRepository _productToBuyerRepository;
         private readonly IUserRepository _userRepository;
-        private readonly IRabbitMqProducer _rabbitMqProducer;
         private readonly IServiceBusMessageProducer _serviceBusMessageSender;
-        public ProductService(IProductRepository productRepository, IProductToBuyerRepository productToBuyerRepository, IUserRepository userRepository, IRabbitMqProducer rabbitMqProducer, IServiceBusMessageProducer serviceBusMessageSender)
+        public ProductService(IProductRepository productRepository, IProductToBuyerRepository productToBuyerRepository, IUserRepository userRepository,  IServiceBusMessageProducer serviceBusMessageSender)
         {
             if (productRepository is null)
             {
@@ -33,11 +32,6 @@ namespace EAuction.Shared.Services
             {
                 throw new ArgumentException(nameof(userRepository));
             }
-
-            if (rabbitMqProducer is null)
-            {
-                throw new ArgumentException(nameof(rabbitMqProducer));
-            }
             if (serviceBusMessageSender is null)
             {
                 throw new ArgumentException(nameof(serviceBusMessageSender));
@@ -46,7 +40,6 @@ namespace EAuction.Shared.Services
             _productRepository = productRepository;
             _productToBuyerRepository = productToBuyerRepository;
             _userRepository = userRepository;
-            _rabbitMqProducer = rabbitMqProducer;
             _serviceBusMessageSender = serviceBusMessageSender;
         }
 

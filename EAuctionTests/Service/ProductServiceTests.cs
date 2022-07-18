@@ -18,34 +18,33 @@ namespace EAuction.Tests.Service
     {
         [Test]
         [FakeDependencies]
-        public void ProductService_WithProductRepositoryNull_ThrownError(IProductRepository productRepository, IProductToBuyerRepository productToBuyerRepository, IUserRepository userRepository, IRabbitMqProducer rabbitMqProducer)
+        public void ProductService_WithProductRepositoryNull_ThrownError(IProductRepository productRepository, IProductToBuyerRepository productToBuyerRepository, IUserRepository userRepository,IServiceBusMessageProducer serviceBusMessageProducer)
         {
             productRepository = null;
-            Assert.Throws<ArgumentException>(() => new ProductService(productRepository, productToBuyerRepository, userRepository, rabbitMqProducer));
+            Assert.Throws<ArgumentException>(() => new ProductService(productRepository, productToBuyerRepository, userRepository, serviceBusMessageProducer));
         }
 
         [Test]
         [FakeDependencies]
-        public void ProductService_WithProductToBuyerRepositoryNull_ThrownError(IProductRepository productRepository, IProductToBuyerRepository productToBuyerRepository, IUserRepository userRepository, IRabbitMqProducer rabbitMqProducer)
+        public void ProductService_WithProductToBuyerRepositoryNull_ThrownError(IProductRepository productRepository, IProductToBuyerRepository productToBuyerRepository, IUserRepository userRepository, IServiceBusMessageProducer serviceBusMessageProducer)
         {
             productToBuyerRepository = null;
-            Assert.Throws<ArgumentException>(() => new ProductService(productRepository, productToBuyerRepository, userRepository, rabbitMqProducer));
+            Assert.Throws<ArgumentException>(() => new ProductService(productRepository, productToBuyerRepository, userRepository, serviceBusMessageProducer));
         }
 
         [Test]
         [FakeDependencies]
-        public void ProductService_WithUserRepositoryNull_ThrownError(IProductRepository productRepository, IProductToBuyerRepository productToBuyerRepository, IUserRepository userRepository, IRabbitMqProducer rabbitMqProducer)
+        public void ProductService_WithUserRepositoryNull_ThrownError(IProductRepository productRepository, IProductToBuyerRepository productToBuyerRepository, IUserRepository userRepository, IServiceBusMessageProducer serviceBusMessageProducer)
         {
             userRepository = null;
-            Assert.Throws<ArgumentException>(() => new ProductService(productRepository, productToBuyerRepository, userRepository, rabbitMqProducer));
+            Assert.Throws<ArgumentException>(() => new ProductService(productRepository, productToBuyerRepository, userRepository, serviceBusMessageProducer));
         }
 
         [Test]
         [FakeDependencies]
-        public void ProductService_WithRabbitMqProducerNull_ThrownError(IProductRepository productRepository, IProductToBuyerRepository productToBuyerRepository, IUserRepository userRepository, IRabbitMqProducer rabbitMqProducer)
+        public void ProductService_WithRabbitMqProducerNull_ThrownError(IProductRepository productRepository, IProductToBuyerRepository productToBuyerRepository, IUserRepository userRepository, IServiceBusMessageProducer serviceBusMessageProducer)
         {
-            rabbitMqProducer = null;
-            Assert.Throws<ArgumentException>(() => new ProductService(productRepository, productToBuyerRepository, userRepository, rabbitMqProducer));
+            Assert.Throws<ArgumentException>(() => new ProductService(productRepository, productToBuyerRepository, userRepository, serviceBusMessageProducer));
         }
 
         [Test]
@@ -82,7 +81,7 @@ namespace EAuction.Tests.Service
         public void ProductService_WithUserNotFound_AddBidForProductAsync_Error(ProductService productService,
             [Frozen] Mock<IProductRepository> mockProductRepository,
             [Frozen] Mock<IUserRepository> mockUserRepository,
-            Mock<IRabbitMqProducer> mockRabbitMqProducer)
+            Mock<IServiceBusMessageProducer> mockServiceBusMessageProducer)
         {
             var buyerBid = new BuyerBid()
             {
@@ -117,7 +116,7 @@ namespace EAuction.Tests.Service
         public async Task ProductService_WithValidInput_AddBidForProductAsync_Success(ProductService productService, 
             [Frozen]Mock<IProductRepository> mockProductRepository,
             [Frozen] Mock<IUserRepository> mockUserRepository,
-            Mock<IRabbitMqProducer> mockRabbitMqProducer)
+             Mock<IServiceBusMessageProducer> mockServiceBusMessageProducer)
         {
             var buyerBid = new BuyerBid()
             {
@@ -148,7 +147,7 @@ namespace EAuction.Tests.Service
             mockUserRepository.Setup(x => x.GetUserByEmailAsync(It.IsAny<string>()))
                 .ReturnsAsync(user);
 
-            mockRabbitMqProducer.Setup(x => x.Publish(It.IsAny<string>()));
+            mockServiceBusMessageProducer.Setup(x => x.SendMessageAsync(It.IsAny<string>()));
 
             var result = await productService.AddBidForProductAsync(buyerBid);
 

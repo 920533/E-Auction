@@ -29,23 +29,14 @@ namespace EAuction.API
 {
     public class Startup
     {
-        public static AppSettings AppSettings { get; set; }
 
         public static ServiceInformation ServiceInformation { get; set; }
-
-        public static RabbitMQInformation RabbitMQInformation { get; set; }
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
             var appSettingsJson = File.ReadAllText("appsettings.json");
-
-            AppSettings = JsonConvert.DeserializeObject<AppSettings>(appSettingsJson);
-
             ServiceInformation = JsonConvert.DeserializeObject<ServiceInformation>(appSettingsJson);
-
-            RabbitMQInformation = AppSettings.RabbitMQInformation;
         }
 
         public IConfiguration Configuration { get; }
@@ -73,20 +64,6 @@ namespace EAuction.API
             services.RegisterSwagger();
 
             services.AddControllers();
-
-            services.AddSingleton(service =>
-            {
-                return new ConnectionFactory()
-                {
-                    HostName = RabbitMQInformation.HostName,
-                    UserName = RabbitMQInformation.UserName,
-                    Password = RabbitMQInformation.Password,
-                    Port = RabbitMQInformation.Port,
-                    VirtualHost = RabbitMQInformation.VirtualHost,
-                };
-            });
-
-            services.AddScoped<IRabbitMqProducer, RabbitMqProducer>();
 
             var connectionStrings = Configuration.GetSection("ConnectionStrings");
             services.Configure<ConnectionStrings>(connectionStrings);
@@ -119,17 +96,6 @@ namespace EAuction.API
                 app.UseDeveloperExceptionPage();
             }
             app.UseSwaggerService(env);
-            //app.UseSwagger();
-
-            //app.UseSwaggerUI(options =>
-            //{
-            //    //c.SwaggerEndpoint("/swagger/v1/swagger.json", ServiceInformation.ServiceName);
-            //    options.RoutePrefix = "swagger";
-            //    foreach (var description in provider.ApiVersionDescriptions)
-            //    {
-            //        options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
-            //    }
-            //});
 
             app.UseHttpsRedirection();
 

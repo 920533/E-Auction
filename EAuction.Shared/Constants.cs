@@ -40,8 +40,8 @@
         #region 
 
         public const string connectionString = "Endpoint=sb://sb.";
-        public const string topicName = "topic-orchestration-dev";
-        public const string subscriberName = "subscribtion-gpso-contribution-dev";
+        public const string topicName = "topic-eauction-dev";
+        public const string subscriberName = "subscribtion-eauction-dev";
 
         #endregion
     }
