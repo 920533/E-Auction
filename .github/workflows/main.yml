@@ -12,7 +12,7 @@ on:
   
 env:
    PUBLISH_FOLDER: E-Auction/EAuction.API/bin/Release/netcoreapp3.1/publish
-   PROD_APP_NAME: app-gpso-eauction-prod
+   PROD_APP_NAME: app-eauction-prod
    
 jobs:
    build: 
