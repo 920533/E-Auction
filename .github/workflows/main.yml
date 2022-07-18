@@ -1,0 +1,64 @@
+# This is a basic workflow to help you get started with Actions
+# Docs for the Azure Web Apps Deploy 
+# More GitHub Actions for Azure
+
+name: PROD 
+
+on: 
+  push:
+   branches: [main]
+# Allows you to run workflow manually from Action Tab 
+  workflow_dispatch:
+  
+env:
+   PUBLISH_FOLDER: E-Auction/EAuction.API/bin/Release/netcoreapp3.1/publish
+   PROD_APP_NAME: app-gpso-eauction-prod
+   
+jobs:
+   build: 
+      runs-on: [self-hosted,Windows,X64, EAUCTION]    
+      steps:
+       - uses: actions/checkout@v2
+       - name: Restore dependencies
+         run: dotnet restore
+       - name: Clean Output folder
+         run: dotnet clean    
+       - name: Build with Dotnet
+         run: dotnet build --configuration Release
+       - name: Publish
+         run: dotnet publish --c Release
+       - name: Upload artifact for deployment job
+         uses: actions/upload-artifact@v2 publish --c Release
+         with: 
+          name: '${{env.APP_NAME}}'
+          path:  '${{env.PUBLISH_FOLDER}}'  
+   deploy:
+    runs-on: [self-hosted,Windows,X64,EAUCTION]
+    needs: build
+    environment: 
+      name: PROD
+      url: ${{steps.deploy-to-webapp.outputs.webapp-url}} 
+    steps:
+      - name: Download artifact from build job
+        uses: azure/download-artifact@v2
+        with:
+         name: '${{env.APP_NAME}}'
+         
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+         app-name: '${{env.APP_NAME}}'
+         slot-name: 'production'
+         publish-profile: ${{secrets.APP_EAUCTION_PROD_PUBLISH_PROFILE}}
+         package: .
+      
+      
+
+        
+        
+      
+      
+   
+
+
