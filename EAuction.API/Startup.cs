@@ -35,7 +35,7 @@ namespace EAuction.API
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            var appSettingsJson = File.ReadAllText("appsettings.json");
+            var appSettingsJson = File.ReadAllText("appsettings.Local.json");
             ServiceInformation = JsonConvert.DeserializeObject<ServiceInformation>(appSettingsJson);
         }
 
