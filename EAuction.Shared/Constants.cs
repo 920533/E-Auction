@@ -38,10 +38,9 @@
         #endregion
 
         #region 
-
-        public const string connectionString = "Endpoint=sb://sb.";
-        public const string topicName = "topic-eauction-dev";
-        public const string subscriberName = "subscribtion-eauction-dev";
+        public const string connectionString = "Endpoint=sb://sbns-eauction-prod.servicebus.windows.net/;SharedAccessKeyName=eauction-send-listen;SharedAccessKey=E/AhpJoUzygLMchkmInZpI26+A0UMEYfYf+2IBjLSx8=;EntityPath=sbt-eauction-prod";
+        public const string topicName = "sbt-eauction-prod";
+        public const string subscriberName = "subs-eauction";
 
         #endregion
     }
