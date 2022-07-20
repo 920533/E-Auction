@@ -95,6 +95,10 @@ namespace EAuction.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            //if (!env.EnvironmentName.Contains("Local"))
+            //{
+            //   app.UseAzureAppConfiguration();
+            //}
             app.UseSwaggerService(env);
 
             app.UseHttpsRedirection();
