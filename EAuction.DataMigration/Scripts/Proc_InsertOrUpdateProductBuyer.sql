@@ -17,7 +17,7 @@ BEGIN
 		  END
 		ELSE
 		  BEGIN
-		    Insert into Product(BuyerProductId,ProductId,UserId,BidAmount,CreatedDate,LastModifiedDate)
+		    Insert into ProductBuyer(BuyerProductId,ProductId,UserId,BidAmount,CreatedDate,LastModifiedDate)
 			values(@BuyerProductId,@ProductId,@UserId,@BidAmount,GETUTCDATE(),GETUTCDATE())
 		  END
 	COMMIT TRANSACTION tran1

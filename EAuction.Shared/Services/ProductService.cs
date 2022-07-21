@@ -127,8 +127,8 @@ namespace EAuction.Shared.Services
             var productbids = new ProductBids()
             {
                 ProductName = prod.ProductName,
-                ShortDescription = prod.ShortDeceription,
-                DetailedDeceription = prod.DetailedDeceription,
+                ShortDescription = prod.ShortDescription,
+                DetailedDescription = prod.DetailedDescription,
                 Category = prod.Category,
                 BidEndDate = prod.BidEndDate,
                 StartingPrice = prod.StartingPrice

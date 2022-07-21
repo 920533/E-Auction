@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EAuction.DataMigration.Migrations
 {
     [DbContext(typeof(AuctionDbContext))]
-    [Migration("20220712092552_Create_Product_Table")]
-    partial class Create_Product_Table
+    [Migration("20220721130141_Proc_InsertOrUpdateUser")]
+    partial class Proc_InsertOrUpdateUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

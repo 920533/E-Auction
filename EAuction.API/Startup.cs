@@ -35,7 +35,7 @@ namespace EAuction.API
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            var appSettingsJson = File.ReadAllText("appsettings.Local.json");
+            var appSettingsJson = File.ReadAllText("appsettings.json");
             ServiceInformation = JsonConvert.DeserializeObject<ServiceInformation>(appSettingsJson);
         }
 
@@ -106,6 +106,13 @@ namespace EAuction.API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            //run any database migrations on startup
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<AuctionDbContext>();
+                context.Database.Migrate();
+            }
 
             app.UseEndpoints(endpoints =>
             {

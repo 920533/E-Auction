@@ -12,7 +12,7 @@ namespace EAuction.DataMigration
         public AuctionDbContext CreateDbContext(string[] args)
         {
             var optionbuilder = new DbContextOptionsBuilder<AuctionDbContext>();
-            optionbuilder.UseSqlServer("Server=CTSDOTNET455;Database=EAuction920533; User ID=sa;Password=pass@word1;");
+            optionbuilder.UseSqlServer("Server=CTSDOTNET455;Database=E-Auction920533; User ID=sa;Password=pass@word1;");
             return new AuctionDbContext(optionbuilder.Options);
         }
     }

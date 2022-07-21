@@ -10,7 +10,7 @@ namespace EAuction.DataMigration
     {
      public static string GetEmbeddedSql(string sqlResourceName)
         {
-            string resourcePreFix = "EAuction.DataMigration.Scripts";
+            string resourcePreFix = "EAuction.DataMigration.Scripts.";
             string fullSqlResource = resourcePreFix + sqlResourceName;
             Assembly migrationAssembly = Assembly.GetAssembly(typeof(MigrationHelper));
             using Stream embeddedSqlStream = migrationAssembly.GetManifestResourceStream(fullSqlResource);

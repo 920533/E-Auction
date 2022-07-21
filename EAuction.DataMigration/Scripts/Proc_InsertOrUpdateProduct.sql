@@ -1,8 +1,8 @@
 ﻿CREATE PROCEDURE [dbo].[InsertOrUpdateProduct]
 @ProductId nvarchar(50),
 @ProductName nvarchar(30),
-@ShortDeceription nvarchar(30),
-@DetailedDeceription nvarchar(30),
+@ShortDescription nvarchar(30),
+@DetailedDescription nvarchar(30),
 @Category int,
 @StartingPrice decimal(20,2),
 @BidEndDate nvarchar(30)

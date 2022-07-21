@@ -16,7 +16,7 @@ BEGIN
 	BEGIN TRANSACTION tran1
 	BEGIN TRY
 		DECLARE @IdToUpdate bigint
-		SET @IdToUpdate= (SELECT TOP 1 Id from [User] Where ProductId=@ProductId order by Id desc)
+		SET @IdToUpdate= (SELECT TOP 1 Id from [User] Where UserId=@UserId order by Id desc)
 		IF(@IdToUpdate IS NOT NULL)
 		  BEGIN
 			Update [User] set UserId=@UserId,LastName=@LastName,Address=@Address,City=@City,State=@State,Pin=@Pin,Phone=@Phone,
@@ -25,7 +25,7 @@ BEGIN
 		  END
 		ELSE
 		  BEGIN
-		    Insert into Product(UserId,FirstName,LastName,Address,City,State,Pin,Phone,Email,UserName,Password,UserType,CreatedDate,LastModifiedDate)
+		    Insert into [User](UserId,FirstName,LastName,Address,City,State,Pin,Phone,Email,UserName,Password,UserType,CreatedDate,LastModifiedDate)
 			values(@UserId,@FirstName,@LastName,@Address,@City,@State,@Pin,@Phone,@Email,@UserName,@Password,@UserType,GETUTCDATE(),GETUTCDATE())
 		  END
 	COMMIT TRANSACTION tran1

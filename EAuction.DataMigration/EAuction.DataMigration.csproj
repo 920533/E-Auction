@@ -16,6 +16,7 @@
     <None Remove="Scripts\Proc_InsertOrUpdateProductBuyerDrop.sql" />
     <None Remove="Scripts\Proc_InsertOrUpdateProductDrop.sql" />
     <None Remove="Scripts\Proc_InsertOrUpdateUser.sql" />
+    <None Remove="Scripts\Proc_InsertOrUpdateUserDrop.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +24,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\Create_ProductBuyer_Table_Drop.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scripts\Create_Product_Table.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\Create_User_Table_Drop.sql">
@@ -34,7 +38,7 @@
     <EmbeddedResource Include="Scripts\Create_Product_Table_Drop.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Create_Product_Table.sql">
+    <EmbeddedResource Include="Scripts\Proc_InsertOrUpdateUserDrop.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\Proc_InsertOrUpdateUser.sql">
