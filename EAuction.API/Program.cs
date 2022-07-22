@@ -23,22 +23,17 @@ namespace EAuction.API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
-            //.ConfigureAppConfiguration((context, config) => {
-            //    var root = config.Build();
-            //    if (context.HostingEnvironment.EnvironmentName.ToUpperInvariant().Contains("LOCAL"))
-            //    {
-            //        return;
-            //    }
-            //    var keyVaultUri = $"https://{root["KeyVaultSettings:VaultName"]}.vault.azure.net/";
-            //    var keyVaultReloadTimeout = Convert.ToInt32($"{root["KeyVaultSettings.ReloadTimeout"]}");
-            //    config.AddAzureKeyVault(
-            //       new Uri(keyVaultUri),
-            //       new DefaultAzureCredential(),
-            //       new AzureKeyVaultConfigurationOptions
-            //       {
-            //           ReloadInterval = TimeSpan.FromMinutes(keyVaultReloadTimeout)
-            //       }) ;
-            //});
+                })
+            .ConfigureAppConfiguration((context, config) => {
+                var root = config.Build();
+                if (context.HostingEnvironment.EnvironmentName.ToUpperInvariant().Contains("DEVELOPMENT"))
+                {
+                    return;
+                }
+                var keyVaultUri = $"https://{root["KeyVault:Vault"]}.vault.azure.net/";
+                var ClientId = root["KeyVault.ClientId"];
+                var ClientSecret = root["KeyVault.ClientSecret"];
+                config.AddAzureKeyVault(keyVaultUri,ClientId,ClientSecret);
+        });
     }
 }

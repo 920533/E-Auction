@@ -5,7 +5,7 @@ namespace EAuction.Shared.Models
 {
     public class ConnectionStrings
     {
-        public  string DbConnection { get; set; }
+        public  string EAuctionDB { get; set; }
     }
 
   

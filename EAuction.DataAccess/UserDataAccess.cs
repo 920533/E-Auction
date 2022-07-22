@@ -23,7 +23,7 @@ namespace EAuction.DataAccess
         public UserDataAccess(ILogger<UserDataAccess> logger,IOptions<ConnectionStrings> connectionString)
         {
             _logger = logger;
-            _connectionString = connectionString.Value.DbConnection;
+            _connectionString = connectionString.Value.EAuctionDB;
         }
 
         public async Task<int> AddUser(UserDto productDto)

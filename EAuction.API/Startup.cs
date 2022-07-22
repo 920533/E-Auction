@@ -67,7 +67,7 @@ namespace EAuction.API
 
             var connectionStrings = Configuration.GetSection("ConnectionStrings");
             services.Configure<ConnectionStrings>(connectionStrings);
-            var connectionString = Configuration.GetConnectionString("DbConnection");
+            var connectionString = Configuration.GetConnectionString("EAuctionDB");
             services.AddDbContext<AuctionDbContext>(
                 options => options.UseSqlServer(connectionString));
             services
@@ -95,10 +95,10 @@ namespace EAuction.API
             {
                 app.UseDeveloperExceptionPage();
             }
-            //if (!env.EnvironmentName.Contains("Local"))
-            //{
-            //   app.UseAzureAppConfiguration();
-            //}
+            if (!env.EnvironmentName.Contains("Development"))
+            {
+                app.UseAzureAppConfiguration();
+            }
             app.UseSwaggerService(env);
 
             app.UseHttpsRedirection();

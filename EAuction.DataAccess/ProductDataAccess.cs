@@ -23,7 +23,7 @@ namespace EAuction.DataAccess
         public ProductDataAccess(ILogger<ProductDataAccess> logger,IOptions<ConnectionStrings> connectionString)
         {
             _logger = logger;
-            _connectionString = connectionString.Value.DbConnection;
+            _connectionString = connectionString.Value.EAuctionDB;
         }
 
         public async Task<int>AddProduct(ProductDto productDto)
