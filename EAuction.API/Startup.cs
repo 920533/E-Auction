@@ -24,6 +24,8 @@ using EAuction.BusinessLogic.MessageBroker;
 using EAuction.DataAccess;
 using EAuction.DataMigration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using NLog;
 
 namespace EAuction.API
 {
@@ -100,6 +102,9 @@ namespace EAuction.API
                 app.UseAzureAppConfiguration();
             }
             app.UseSwaggerService(env);
+            var settings = app.ApplicationServices.GetService<IOptions<ConfigurationSettings>>();
+            GlobalDiagnosticsContext.Set("app_name", "EAuction");
+            GlobalDiagnosticsContext.Set("env", settings.Value.Env);
 
             app.UseHttpsRedirection();
 

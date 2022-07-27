@@ -8,19 +8,43 @@ using System.Linq;
 using System.Threading.Tasks;
 using Azure.Identity;
 using Azure.Extensions.AspNetCore.Configuration.Secrets;
-
+using NLog;
+using NLog.Web;
+using LogLevel = NLog.LogLevel;
 namespace EAuction.API
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            LogFactory logFactory =  NLogBuilder.ConfigureNLog("nlog.config");
+            Logger logger = logFactory.GetCurrentClassLogger();
+            try
+            {
+                logger.Log(LogLevel.Debug, "Starting App");
+                CreateHostBuilder(args).Build().Run();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex,"Stopped program due to exception");
+               
+            }
+            finally
+            {
+                logger.Log(LogLevel.Debug, "Close App");
+                LogManager.Shutdown();
+
+            }
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+            .ConfigureLogging(loggerBuilder => {
+                loggerBuilder.ClearProviders();
+            })
+            .UseNLog()
+            .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
                 })
