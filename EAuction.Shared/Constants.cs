@@ -38,8 +38,8 @@
         #endregion
 
         #region 
-        //public const string connectionString = "Endpoint=sb://sbns-eauction-prod.servicebus.windows.net/;SharedAccessKeyName=eauction-send-listen;SharedAccessKey=E/AhpJoUzygLMchkmInZpI26+A0UMEYfYf+2IBjLSx8=;EntityPath=sbt-eauction-prod";
-        public const string connectionString = "Endpoint=sb://sbns-eauction-prod.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=S5NPrghLLXSYumy3PGEDRV9BAPr4Yrb1KQhCtcrSQ5k=";
+        public const string connectionString = "Endpoint=sb://sbns-eauction-prod.servicebus.windows.net/;SharedAccessKeyName=eauction-send-listen;SharedAccessKey=E/AhpJoUzygLMchkmInZpI26+A0UMEYfYf+2IBjLSx8=;EntityPath=sbt-eauction-prod";
+        //public const string connectionString = "Endpoint=sb://sbns-eauction-prod.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=S5NPrghLLXSYumy3PGEDRV9BAPr4Yrb1KQhCtcrSQ5k=";
         public const string topicName = "sbt-eauction-prod";
         public const string subscriberName = "subs-eauction";
 
