@@ -1,0 +1,86 @@
+<section id="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2>Add product for sell</h2>
+
+        <div style="color:red !important;" *ngIf="errorMessage!=''">
+          <p>{{errorMessage}}</p>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <select class="form-control my-form" name="sel" id="sel" [(ngModel)]="sellerId">
+            <option [value]="0">Select Seller</option>
+            <option *ngFor="let item of lstSeller" [value]="item.sellerId">{{item.firstName}} {{item.lastName}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <textarea name="sdescription" class="form-control my-form" placeholder="Short Description (Users will see only first 10 symbols at home page)" style="height: 50px"
+                    [formControl]="sdescription"></textarea>
+        </div>
+        <div class="form-group">
+          <select class="form-control my-form" name="cat" id="cat" [(ngModel)]="selCategory">
+            <option value="">Select Category</option>
+            <option *ngFor="let item of categories" [value]="item">{{item}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input [matDatepicker]="picker" (focus)="picker.open()" class="form-control my-form"
+                 placeholder="Chose bid end date" [formControl]="endDate">
+          <mat-datepicker #picker></mat-datepicker>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <input type="text" name="productName" class="form-control my-form" placeholder="Product Name" [formControl]="productName" />
+        </div>
+        <div class="form-group">
+          <textarea name="description" class="form-control my-form" placeholder="Detailed Description" style="height: 50px"
+                    [formControl]="description"></textarea>
+        </div>
+        <div class="form-group">
+          <input type="number" min="1" name="startPrice" class="form-control my-form" placeholder="Start price"
+                 [formControl]="startPrice" />
+
+        </div>
+        <button type="button" (click)="create();" class="btn btn-outline-info btn-block">Add product</button>
+      </div>
+    </div>
+
+    <br />
+    <table class="table" style="overflow-y: auto !important;">
+      <thead>
+        <tr>
+          <th scope="col">Product Name</th>
+          <th scope="col">Short Description</th>
+          <th scope="col">Description</th>
+          <th scope="col">Category</th>
+          <th scope="col">Start Price</th>
+          <th scope="col">Bid Start Date</th>
+          <th scope="col">Bid End Date</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of lstProducts">
+          <td>{{item.productName}}</td>
+          <td>{{item.shortDescription}}</td>
+          <td>{{item.detailedDescription}}</td>
+          <td>{{item.category}}</td>
+          <td>${{item.startingPrice}}</td>
+          <td>{{item.createdDate  | date}}</td>
+          <td>{{item.bidEndDate  | date}}</td>
+         
+          <td >
+            <button type="button" (click)="deleteProducts(item.productId);" class="btn btn-outline-info">Delete</button>
+            <button style="margin-left: 7px !important; margin-bottom: 2px !important;" type="button" (click)="create();" class="btn btn-outline-info">View Bid</button>
+          </td>
+        </tr>
+      
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
